@@ -8,7 +8,7 @@ x11_dep = [dependency('x11'),dependency('freetype2'),dependency('xft'),dependenc
 #others (ugly ahh hell ik ik), Wno-d-d is in the OG Makefile
 add_project_arguments(['-DVERSION="'+version+'"','-Wno-deprecated-declarations'],language : 'c')
 
-install='/usr/bin/local/'
+install='/usr/local/bin'
 
 executable('dwm',
             src,
