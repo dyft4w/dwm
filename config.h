@@ -64,6 +64,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *roficmd[] = {"/home/dyft4w/.config/rofi/launchers/type-1/launcher.sh",NULL};
+static const char *powermenu[] = {"/home/dyft4w/.config/rofi/powermenu/type-1/powermenu.sh", NULL};
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *thunarcmd[] = {"/usr/bin/thunar", NULL};
 
@@ -90,9 +91,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_d,      focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_n, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_d,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_n, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_n, 	   focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_d,	   tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_n, 	   tagmon,         {.i = +1 } },
+	{ Mod1Mask|ControlMask,		XK_Delete, spawn, 	   {.v = powermenu } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
