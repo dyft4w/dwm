@@ -3,3 +3,4 @@ drw.o
 dwm.o
 util.o
 build/
+.cache/
