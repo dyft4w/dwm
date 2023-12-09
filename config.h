@@ -28,6 +28,8 @@ static const char *colors[][3]      = {
 static const char *upvol[]      = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
 static const char *downvol[]    = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
 static const char *mutevol[]    = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
+static const char *upbrightness[] = {"brightnessctl", "set", "5%+", NULL};
+static const char *downbrightness[] = {"brightnessctl", "set", "5%-", NULL};
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -68,8 +70,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *roficmd[] = {"/home/dyft4w/.config/rofi/launchers/type-1/launcher.sh",NULL};
-static const char *powermenu[] = {"/home/dyft4w/.config/rofi/powermenu/type-1/powermenu.sh", NULL};
+static const char *roficmd[] = {"$HOME/.config/rofi/default-launcher.sh",NULL};
+static const char *powermenu[] = {"$HOME/.config/rofi/default-powermenu.sh", NULL};
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *thunarcmd[] = {"/usr/bin/thunar", NULL};
 
@@ -110,9 +112,11 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_l,      quit,           {0} },
-	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
-	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,                    	XF86XK_AudioLowerVolume, 	spawn, 	{.v = downvol } },
+	{ 0,                    	XF86XK_AudioMute, 		spawn, 	{.v = mutevol } },
+	{ 0,                    	XF86XK_AudioRaiseVolume, 	spawn, 	{.v = upvol   } },
+	{0,      			XF86XK_MonBrightnessUp, 	spawn,  {.v=upbrightness}},
+  	{0,       			XF86XK_MonBrightnessDown, 	spawn, 	{.v=downbrightness}},
 };
 
 /* button definitions */
