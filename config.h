@@ -31,7 +31,7 @@ static const char *mutevol[]    = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_
 static const char *upbrightness[] = {"brightnessctl", "set", "5%+", NULL};
 static const char *downbrightness[] = {"brightnessctl", "set", "5%-", NULL};
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -77,31 +77,37 @@ static const char *thunarcmd[] = {"/usr/bin/thunar", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_e,      spawn,          {.v = thunarcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_c,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_h,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_comma,  setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_j,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_p,      setlayout,      {0} },
-	{ MODKEY,                       XK_v,      togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_d,      focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_n, 	   focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_d,	   tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_n, 	   tagmon,         {.i = +1 } },
-	{ Mod1Mask|ControlMask,		XK_Delete, spawn, 	   {.v = powermenu } },
+	{ MODKEY,                       XK_space,  			spawn,          {.v = roficmd } 	},
+	{ MODKEY,                       XK_Return, 			spawn,          {.v = termcmd } 	},
+	{ MODKEY,                       XK_e,      			spawn,          {.v = thunarcmd } 	},
+	{ MODKEY,                       XK_b,      			togglebar,      {0} 			},
+	{ MODKEY,                       XK_a,      			focusstack,     {.i = +1 } 		},
+	{ MODKEY,                       XK_o,      			focusstack,     {.i = -1 } 		},
+	{ MODKEY,                       XK_u,      			incnmaster,     {.i = +1 } 		},
+	{ MODKEY,                       XK_i,      			incnmaster,     {.i = -1 } 		},
+	{ MODKEY,                       XK_comma,  			setmfact,       {.f = -0.05 } 		},
+	{ MODKEY,                       XK_period, 			setmfact,       {.f = +0.05 } 		},
+	{ MODKEY|ShiftMask,             XK_Return, 			zoom,           {0} 			}, //stupid ahh x11 libs randomly capitalizing letters
+	{ MODKEY,                       XK_Tab,    			view,           {0} 			},
+	{ MODKEY|ShiftMask,             XK_j,      			killclient,     {0} 			},
+	{ MODKEY,                       XK_t,      			setlayout,      {.v = &layouts[0] } 	},
+	{ MODKEY,                       XK_f,      			setlayout,      {.v = &layouts[1] } 	},
+	{ MODKEY,                       XK_m,      			setlayout,      {.v = &layouts[2] } 	},
+	{ MODKEY,                       XK_p,      			setlayout,      {0} 			},
+	{ MODKEY,                       XK_v,      			togglefloating, {0} 			},
+	{ MODKEY|ControlMask,           XK_0,      			view,           {.ui = ~0 } 		},
+	{ MODKEY|ShiftMask,             XK_0,      			tag,            {.ui = ~0 } 		},
+	{ MODKEY,                       XK_d,      			focusmon,       {.i = -1 } 		},
+	{ MODKEY,                       XK_n, 	   			focusmon,       {.i = +1 } 		},
+	{ MODKEY|ShiftMask,             XK_d,	   			tagmon,         {.i = -1 } 		},
+	{ MODKEY|ShiftMask,             XK_n, 	   			tagmon,         {.i = +1 } 		},
+	{ Mod1Mask|ControlMask,		XK_Delete, 			spawn, 	   	{.v = powermenu } 	},
+	{ MODKEY|ShiftMask,             XK_l,      			quit,           {0} 			},
+	{ 0,                    	XF86XK_AudioLowerVolume, 	spawn, 		{.v = downvol } 	},
+	{ 0,                    	XF86XK_AudioMute, 		spawn, 		{.v = mutevol } 	},
+	{ 0,                    	XF86XK_AudioRaiseVolume, 	spawn, 		{.v = upvol   } 	},
+	{ 0,      			XF86XK_MonBrightnessUp, 	spawn,  	{.v = upbrightness  } 	},
+  	{ 0,       			XF86XK_MonBrightnessDown, 	spawn, 		{.v = downbrightness} 	},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -111,12 +117,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_l,      quit,           {0} },
-	{ 0,                    	XF86XK_AudioLowerVolume, 	spawn, 	{.v = downvol } },
-	{ 0,                    	XF86XK_AudioMute, 		spawn, 	{.v = mutevol } },
-	{ 0,                    	XF86XK_AudioRaiseVolume, 	spawn, 	{.v = upvol   } },
-	{0,      			XF86XK_MonBrightnessUp, 	spawn,  {.v=upbrightness}},
-  	{0,       			XF86XK_MonBrightnessDown, 	spawn, 	{.v=downbrightness}},
+	TAGKEYS( 			XK_0, 			   9)
 };
 
 /* button definitions */
